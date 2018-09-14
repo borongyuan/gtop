@@ -21,7 +21,7 @@
 #include "display.hh"
 #include "utils.hh"
 
-const int STATS_BUFFER_SIZE = 256;
+const int STATS_BUFFER_SIZE = 512;
 
 const std::string TEGRASTATS_PATH     = "~/tegrastats";
 const std::string TEGRASTATSFAKE_PATH = "./tegrastats_fake";
@@ -29,8 +29,7 @@ const std::string TEGRASTATSFAKE_PATH = "./tegrastats_fake";
 void read_tegrastats();
 tegrastats parse_tegrastats(const char *);
 
-void get_cpu_stats_tx1(tegrastats &, const std::string &);
-void get_cpu_stats_tx2(tegrastats &, const std::string &);
+void get_cpu_stats(tegrastats &, const std::string &);
 void get_gpu_stats(tegrastats &, const std::string &);
 void get_mem_stats(tegrastats &, const std::string &);
 

@@ -116,21 +116,19 @@ tegrastats parse_tegrastats(const char * buffer) {
   tegrastats ts;
   auto stats = tokenize(buffer, ' ');
 
-  if (stats.size() >= 15)
+  // if (stats.size() >= 15)
     ts.version = TX1;
-  else
-    ts.version = TX2;
+  // else
+    // ts.version = TX2;
 
   get_mem_stats(ts, stats.at(1));
 
   switch (ts.version) {
     case TX1:
-      get_cpu_stats_tx1(ts, stats.at(5));
-      get_gpu_stats(ts, stats.at(15));
+      get_cpu_stats(ts, stats.at(8));
+      get_gpu_stats(ts, stats.at(12));
       break;
-    case TX2:
-      get_cpu_stats_tx2(ts, stats.at(5));
-      get_gpu_stats(ts, stats.at(13));
+    case TX2: // TODO
       break;
     case TK1: // TODO
       break;
@@ -139,21 +137,8 @@ tegrastats parse_tegrastats(const char * buffer) {
   return ts;
 }
 
-void get_cpu_stats_tx1(tegrastats & ts, const std::string & str) {
-  auto cpu_stats = tokenize(str, '@');
-  auto cpu_usage_all = cpu_stats.at(0);
-  ts.cpu_freq.push_back(std::stoi(cpu_stats.at(1)));
-  auto cpu_usage = tokenize(cpu_usage_all.substr(1, cpu_usage_all.size()-2), ',');
 
-  for (const auto & u: cpu_usage) {
-    if (u != "off")
-      ts.cpu_usage.push_back(std::stoi(u.substr(0, u.size()-1)));
-    else
-      ts.cpu_usage.push_back(0);
-  }
-}
-
-void get_cpu_stats_tx2(tegrastats & ts, const std::string & str) {
+void get_cpu_stats(tegrastats & ts, const std::string & str) {
   const auto cpu_stats = tokenize(str.substr(1, str.size()-1), ',');
   const auto at = std::string("@");
 
