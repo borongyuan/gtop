@@ -4,6 +4,9 @@
 # gtop
 Martin Kersner, <m.kersner@gmail.com>, 2017
 
+# Fix
+Modified for Jetson TX1 with Jetpack 3.3
+
 ## Description
 `gtop` is CPU, GPU and memory viewer utilizing information provided by `tegrastats` (terminal utility for [NVIDIA<sup>&reg;</sup> JETSON<sup>&trade;</sup>](http://www.nvidia.com/object/embedded-systems-dev-kits-modules.html) embedded platform). It requires `ncurses` and its output resembles [`htop`](https://github.com/hishamhm/htop).
 
