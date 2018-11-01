@@ -195,7 +195,7 @@ void display_stats(const dimensions & d, const tegrastats & ts) {
   display_mem_stats(ts.cpu_usage.size()+1, ts);
 
   // Swap
-  display_swap_stats(ts.cpu_usage.size()+1, ts);
+  display_swap_stats(ts.cpu_usage.size()+2, ts);
 }
 
 void update_usage_chart(std::vector<std::vector<int>> & usage_buffer,
