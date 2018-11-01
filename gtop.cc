@@ -122,7 +122,7 @@ tegrastats parse_tegrastats(const char * buffer) {
   ts.version = TX2;
 
   get_mem_stats(ts, stats.at(1));
-  // get_swap_stats(ts, stats.at(5));
+  get_swap_stats(ts, stats.at(5));
 
   switch (ts.version) {
     case TX1:
@@ -195,7 +195,7 @@ void display_stats(const dimensions & d, const tegrastats & ts) {
   display_mem_stats(ts.cpu_usage.size()+1, ts);
 
   // Swap
-  // display_swap_stats(ts.cpu_usage.size()+1, ts);
+  display_swap_stats(ts.cpu_usage.size()+1, ts);
 }
 
 void update_usage_chart(std::vector<std::vector<int>> & usage_buffer,

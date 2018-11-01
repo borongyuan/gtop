@@ -33,6 +33,7 @@ const float WIDGET_MAX_COLS_F32 = 100.0;
 const float WIDGET_WIDTH     = 0.7;
 
 const int MEM_BUFFER_SIZE    = 20;
+const int SWAP_BUFFER_SIZE    = 20;
 const float MEGA2GIGA        = 1000.0;
 
 struct bar {
@@ -59,6 +60,7 @@ void display_bars(const int &, const int &, const int &);
 void display_bars(const int &, const int &, const int &, const int &);
 void display_bars(const int &);
 void display_mem_bars(const int &, const int &, const int &, const int &);
+void display_swap_bars(const int &, const int &, const int &, const int &);
 float mega2giga(const int &);
 bar update_bar_dims(const int &);
 widget update_widget_dims(const int &);
@@ -69,6 +71,7 @@ void clear_row(const int &, const int &);
 void display_cpu_stats(const int &, const tegrastats &);
 void display_gpu_stats(const int &, const tegrastats &);
 void display_mem_stats(const int &, const tegrastats &);
+void display_swap_stats(const int &, const tegrastats &);
 void display_usage_chart(const int &, const std::vector<std::vector<int>>);
 
 #endif // DISPLAY_HH_

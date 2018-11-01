@@ -46,6 +46,22 @@ void display_mem_bars(const int & row, const int & col, const int & val, const i
   refresh();
 }
 
+void display_swap_bars(const int & row, const int & col, const int & val, const int & max_val) {
+  auto val_norm = int((float(val) / max_val) * 100);
+  auto b = update_bar_dims(val_norm);
+
+  clear_row(row, col);
+
+  display_left_bracket(row, col);
+  display_bars(b.val_bar);
+
+  char buffer[SWAP_BUFFER_SIZE];
+  sprintf(buffer, "%2.2fG/%2.2fG", mega2giga(val), mega2giga(max_val));
+  mvprintw(row, col+b.max_bar-6, buffer);
+  display_right_bracket();
+  refresh();
+}
+
 // deprecated move to widget
 bar update_bar_dims(const int & val) {
   bar b;
@@ -129,6 +145,11 @@ void display_gpu_stats(const int & row, const tegrastats & ts) {
 void display_mem_stats(const int & row, const tegrastats & ts) {
   mvprintw(row, 0, "Mem");
   display_mem_bars(row, BAR_OFFSET, ts.mem_usage, ts.mem_max);
+}
+
+void display_swap_stats(const int & row, const tegrastats & ts) {
+  mvprintw(row, 0, "Swp");
+  display_swap_bars(row, BAR_OFFSET, ts.swap_usage, ts.swap_max);
 }
 
 void display_usage_chart(const int & row, const std::vector<std::vector<int>> cpu_usage_buffer) {
