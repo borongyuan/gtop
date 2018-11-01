@@ -16,6 +16,9 @@ struct tegrastats {
   int mem_usage;
   int mem_max;
 
+  int swap_usage;
+  int swap_max;
+
   std::vector<int> cpu_usage;
   std::vector<int> cpu_freq;
 
