@@ -130,7 +130,7 @@ tegrastats parse_tegrastats(const char * buffer) {
       get_gpu_stats(ts, stats.at(12));
       break;
     case TX2: // TODO
-      get_cpu_stats_tx2(ts, stats.at(9));
+      get_cpu_stats(ts, stats.at(9));
       get_gpu_stats(ts, stats.at(13));
     case TK1: // TODO
       break;
