@@ -32,6 +32,7 @@ tegrastats parse_tegrastats(const char *);
 void get_cpu_stats(tegrastats &, const std::string &);
 void get_gpu_stats(tegrastats &, const std::string &);
 void get_mem_stats(tegrastats &, const std::string &);
+void get_swap_stats(tegrastats &, const std::string &);
 
 void display_stats(const dimensions &, const tegrastats &);
 void update_usage_chart(std::vector<std::vector<int>> &, const std::vector<int> &);

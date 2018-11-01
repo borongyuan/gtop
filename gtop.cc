@@ -117,11 +117,12 @@ tegrastats parse_tegrastats(const char * buffer) {
   auto stats = tokenize(buffer, ' ');
 
   // if (stats.size() >= 15)
-    ts.version = TX1;
+  //   ts.version = TX1;
   // else
-    // ts.version = TX2;
+  ts.version = TX2;
 
   get_mem_stats(ts, stats.at(1));
+  // get_swap_stats(ts, stats.at(5));
 
   switch (ts.version) {
     case TX1:
@@ -129,7 +130,8 @@ tegrastats parse_tegrastats(const char * buffer) {
       get_gpu_stats(ts, stats.at(12));
       break;
     case TX2: // TODO
-      break;
+      get_cpu_stats_tx2(ts, stats.at(9));
+      get_gpu_stats(ts, stats.at(13));
     case TK1: // TODO
       break;
   }
@@ -174,6 +176,14 @@ void get_mem_stats(tegrastats & ts, const std::string & str) {
   ts.mem_max = std::stoi(mem_max.substr(0, mem_max.size()-2));
 }
 
+void get_swap_stats(tegrastats & ts, const std::string & str) {
+  const auto swap_stats = tokenize(str, '/');
+  const auto swap_max = swap_stats.at(1);
+
+  ts.swap_usage = std::stoi(swap_stats.at(0));
+  ts.swap_max = std::stoi(swap_max.substr(0, swap_max.size()-2));
+}
+
 void display_stats(const dimensions & d, const tegrastats & ts) {
   // CPU
   display_cpu_stats(0, ts);
@@ -183,6 +193,9 @@ void display_stats(const dimensions & d, const tegrastats & ts) {
 
   // Memory
   display_mem_stats(ts.cpu_usage.size()+1, ts);
+
+  // Swap
+  // display_swap_stats(ts.cpu_usage.size()+1, ts);
 }
 
 void update_usage_chart(std::vector<std::vector<int>> & usage_buffer,
