@@ -119,12 +119,15 @@ tegrastats parse_tegrastats(const char * buffer) {
   // if (stats.size() >= 15)
   //   ts.version = TX1;
   // else
-  ts.version = TX2;
+  ts.version = NANO;
 
   get_mem_stats(ts, stats.at(1));
   get_swap_stats(ts, stats.at(5));
 
   switch (ts.version) {
+    case NANO:
+      get_cpu_stats(ts, stats.at(12));
+      get_gpu_stats(ts, stats.at(16));
     case TX1:
       get_cpu_stats(ts, stats.at(8));
       get_gpu_stats(ts, stats.at(12));
